@@ -35,7 +35,7 @@ public class Muncitor implements Runnable{
                          BlackBoard.addscaun(scaun);
                          else
                          {
-                             System.out.println("Scaunul " + scaun.getval() + "Este gata");
+                             System.out.println("Scaunul " + scaun.getval() + " este gata");
                             index++;
                             if(index==nrtotal) {
                                 System.out.println("Am terminat scaunele");

@@ -1,9 +1,9 @@
 package tema1;
 
 public class Scaun {
-    private String tasks;
-    private int nr;
-    private static int val=1;
+    protected String tasks;
+    protected int nr;
+    protected static int val=1;
     public Scaun()
     {
         this.tasks="";

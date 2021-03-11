@@ -7,9 +7,10 @@ public class Main {
         bl.addscaun(new Scaun());
         bl.addscaun(new Scaun());
         bl.addscaun(new Scaun());
-        bl.addscaun(new Scaun());
-        bl.addscaun(new Scaun());
-
+        bl.addscaun(new ScaunFaraSpatar());
+        bl.addscaun(new ScaunFaraSpatar());
+        bl.addscaun(new ScaunFaraStabilizator());
+        bl.addscaun(new ScaunFaraStabilizator());
         Muncitor m1=new Muncitor("ION",Task.C,bl);
         Muncitor m2=new Muncitor("VIOREL",Task.F,bl);
         Muncitor m3=new Muncitor("MIRCEA",Task.B,bl);
