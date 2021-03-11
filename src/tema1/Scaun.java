@@ -1,28 +1,55 @@
 package tema1;
 
 public class Scaun {
-    private int id;
-    private static int index =0;
-    private String Task;
-    private int time;
+    private String tasks;
+    private int nr;
+    private static int val=1;
     public Scaun()
     {
-        Task = index +" : ";
-        id=index++;
-        this.time=0;
-    }
-    public void make(Tasks t,int ts)
-    {
-        Task = Task + String.valueOf(t);
-        this.time=this.time+ts;
+        this.tasks="";
+        this.nr=this.val++;
     }
 
-    public int gettotaltime()
+    public int getval()
     {
-        return this.time;
+        return this.nr;
+    }
+    public void addtask(Task Q)
+    {
+        tasks=tasks+Q.toString();
+    }
+    public String printtasks()
+    {
+        return tasks;
     }
 
-   public int getId(){
-        return id;
+    public boolean isok(Task t)
+    {
+
+        String c=t.toString();
+        if(tasks.contains(c))
+            return false;
+        else
+        if(c.equals("C") && !tasks.contains("C"))
+            return true;
+        else
+            if(c=="F"&& !tasks.contains("F"))
+                return tasks.contains("C");
+            else
+                if(c=="B" && !tasks.contains("B"))
+                    return tasks.contains("C");
+                else
+                    if(c=="S" && !tasks.contains("S"))
+                        return tasks.contains("F");
+                    else
+                        if(c=="P" && !tasks.contains("P"))
+                            return tasks.contains("C") && tasks.contains("B")
+                                    && tasks.contains("F") && tasks.contains("S");
+                        else
+                            return false;
+    }
+    public boolean done()
+    {
+        return tasks.length()==5;
     }
 }
