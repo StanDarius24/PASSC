@@ -3,17 +3,27 @@ package tema1;
 import java.util.concurrent.BlockingQueue;
 
 public class Muncitor implements Runnable{
-
+    private int nrtotal;
     private String Name;
     private Tasks Task;
     private int id;
-    private static int index=0;
-    private BlockingQueue <Scaun> intrare,iesire;
-    public Muncitor(String name, Tasks task)
+    private boolean sw = true;
+    private int time;
+    private  BlockingQueue<Scaun> intrare,iesire;
+    public Muncitor(String name, Tasks task,int time)
     {
         this.Name=name;
         this.Task=task;
-        this.id= index++;
+        this.time=time;
+    }
+
+    public void stop()
+    {
+        this.sw=false;
+    }
+
+    public int gettime(){
+        return this.time;
     }
 
     public BlockingQueue<Scaun> getFirst()
@@ -38,14 +48,21 @@ public class Muncitor implements Runnable{
     {
         if(intrare==null) //primul muncitor
         {
-            while(true)
+            while(sw)
             {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(this.time*10);
+                    if(nrtotal<10)
+                    {
+                        nrtotal++;
                     Scaun scaun = new Scaun();
-                    System.out.println(this.Name + " incepe scaunul " + scaun.getId() + " cu taskul " + this.Task.toString());
-                    scaun.make(this.Task);
+                    scaun.make(this.Task,this.time);
+                    System.out.println(this.Name + " incepe scaunul " + scaun.getId() + " cu taskul " + this.Task.toString() + " timpul de lucru total pt acest scaun e = " + scaun.gettotaltime());
                     iesire.put(scaun);
+                    }
+                    else
+                        if(nrtotal==10)
+                            this.stop();
                 }catch(Exception e)
                 {
                     System.out.println(e);
@@ -55,12 +72,18 @@ public class Muncitor implements Runnable{
         }else
             if(iesire == null)
             {
-                while(true)
+                while(sw)
                 {
                     try {
+                        if(nrtotal==10)
+                            this.stop();
+                        nrtotal++;
+                        Thread.sleep(this.time*10);
                         Scaun scaun = intrare.take();
-                        scaun.make(this.Task);
-                        System.out.println(this.Name + " a termiant " + scaun.getId() + " cu taskul " + this.Task.toString());
+                        if(scaun!=null)
+                        {
+                        scaun.make(this.Task,this.time);
+                        System.out.println(this.Name + " a termiant " + scaun.getId() + " cu taskul " + this.Task.toString() + " timpul de lucru total pt acest scaun e = " + scaun.gettotaltime() );}
                     }catch (Exception e)
                     {
                         System.out.println(e);
@@ -69,13 +92,17 @@ public class Muncitor implements Runnable{
             }else
                 if(iesire!= null && intrare != null)
                 {
-                    while(true)
+                    while(sw)
                     {
                         try {
+                            Thread.sleep(this.time*10);
+                            if(nrtotal==10)
+                                this.stop();
                             Scaun scaun = intrare.take();
-                            System.out.println(this.Name + " a termiant " + scaun.getId() + " cu taskul " + this.Task.toString());
-                            scaun.make(this.Task);
-                            iesire.put(scaun);
+                            if(scaun != null){
+                                scaun.make(this.Task,this.time);
+                            System.out.println(this.Name + " a termiant " + scaun.getId() + " cu taskul " + this.Task.toString() +" timpul de lucru total pt acest scaun e = " + scaun.gettotaltime());
+                            iesire.put(scaun);}
                         }catch (Exception e)
                         {
                             System.out.println(e);

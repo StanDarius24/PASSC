@@ -25,16 +25,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Muncitor Ion = new Muncitor("Ion",Tasks.C);
-        Muncitor Vasile = new Muncitor("Vasile",Tasks.F);
-        Muncitor Petru = new Muncitor("Petru",Tasks.B);
-        Muncitor Gheo = new Muncitor("Gheo",Tasks.S);
-        Muncitor Costi = new Muncitor("Costi",Tasks.P);
+        Muncitor Ion = new Muncitor("Ion",Tasks.C,10);
+        Muncitor Vasile = new Muncitor("Vasile",Tasks.F,15);
+        Muncitor Petru = new Muncitor("Petru",Tasks.B,40);
+        Muncitor Gheo = new Muncitor("Gheo",Tasks.S,20);
+        Muncitor Costi = new Muncitor("Costi",Tasks.P,10);
 
-        BlockingQueue<Scaun> q1 = new ArrayBlockingQueue<>(2);
-        BlockingQueue<Scaun> q2 = new ArrayBlockingQueue<>(2);
-        BlockingQueue<Scaun> q3 = new ArrayBlockingQueue<>(2);
-        BlockingQueue<Scaun> q4 = new ArrayBlockingQueue<>(2);
+        BlockingQueue<Scaun> q1 = new ArrayBlockingQueue<>(3);
+        BlockingQueue<Scaun> q2 = new ArrayBlockingQueue<>(3);
+        BlockingQueue<Scaun> q3 = new ArrayBlockingQueue<>(3);
+        BlockingQueue<Scaun> q4 = new ArrayBlockingQueue<>(3);
 
         Ion.setOut(q1);
         Vasile.setIn(q1);
