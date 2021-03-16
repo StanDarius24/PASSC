@@ -5,11 +5,11 @@ package tema1;
  Pipes and Filters
 
  Etapele trebuie rulate in regim Multitasking, pentru acest fapt o sa folosim threaduri.
-Filtrele sunt muncitorii, iar pentru acestia o sa "pornim" cate un thread pentru fiecare.
-O sa avem nevoie de o mod de comunicare intre acestia, adica fiecare sa primeasca o parte din scaun
-sa-l prelucreze asa cum stie el mai bine si sa-l dea mai departe, acestea o sa fie pipe-urile.
+Filtrele sunt muncitorii, iar pentru acestia o sa "pornim" cate un thread pentru fiecare (descompunere in mod natural in mai multe etape de procesare).
+O sa avem nevoie de un mod de comunicare intre acestea, adica fiecare sa primeasca o parte prelucrata din scaun
+sa-si execute taskul (adica sa adauge ce are de adaugat) si sa-l dea mai departe, acestea o sa fie pipe-urile (gestionarea intre muncitori a scaunelor).
 Pentru acestea, stiind ca threadurile folosesc stiva de date ca acces comun, o sa creem o coada
-in main pentru fiecare 2 muncitori care o sa reprezinte modul prin care acestia o sa primeasca materialele.
+in main pentru fiecare 2 muncitori care o sa reprezinte modul prin care acestia o sa primeasca materialele (pipe-urile).
 Componentele neadiacente nu folosesc informatiile comune in acest caz.
 
 Aceste tipuri de filtre sunt Pasive, deoarece activitatea lor este declansata de ce avem in filtre
@@ -25,17 +25,18 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // declararea fiecarei etape de procesare
         Muncitor Ion = new Muncitor("Ion",Tasks.C);
         Muncitor Vasile = new Muncitor("Vasile",Tasks.F);
         Muncitor Petru = new Muncitor("Petru",Tasks.B);
         Muncitor Gheo = new Muncitor("Gheo",Tasks.S);
         Muncitor Costi = new Muncitor("Costi",Tasks.P);
-
+        // declararea pipe-urilor
         BlockingQueue<Scaun> q1 = new ArrayBlockingQueue<>(2);
         BlockingQueue<Scaun> q2 = new ArrayBlockingQueue<>(2);
         BlockingQueue<Scaun> q3 = new ArrayBlockingQueue<>(2);
         BlockingQueue<Scaun> q4 = new ArrayBlockingQueue<>(2);
-
+        // legam pipe-urile intre procese
         Ion.setOut(q1);
         Vasile.setIn(q1);
         Vasile.setOut(q2);
@@ -44,7 +45,7 @@ public class Main {
         Gheo.setIn(q3);
         Gheo.setOut(q4);
         Costi.setIn(q4);
-
+        //pornim prelucrarea scaunelor
         new Thread(Ion).start();
         new Thread(Vasile).start();
         new Thread(Petru).start();
