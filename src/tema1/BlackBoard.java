@@ -3,6 +3,7 @@ package tema1;
 import java.util.ArrayList;
 
 public class BlackBoard {
+    // Datele sunt stocate intr-un arraylist, in acesta se pot adauga, s-au returna.
 private ArrayList<Scaun> scaune;
 private int nrscaune=0;
 

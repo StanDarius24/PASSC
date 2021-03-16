@@ -4,6 +4,8 @@ public class Scaun {
     protected String tasks;
     protected int nr;
     protected static int val=1;
+
+    // o metoda mai formala era sa avem o interfata pentru scaune dar e ok si asa :D
     public Scaun()
     {
         this.tasks="";

@@ -8,6 +8,10 @@ public class Muncitor implements Runnable{
     private int index=0;
     private String name;
     private BlackBoard BlackBoard;
+
+    // fiecare ks are o referinta catre Bb prelucrarea facandu se in felul urmator
+    // se extrag date , daca datele respective pot fi rezolvate partial, se prelucreaza in acest sens
+    // iar apoi se adauga inapoi in blackboard, fiecare ks prelucrand respectiva data doar cu specializarea acestuia
     public Muncitor(String name,Task t,BlackBoard b)
     {
         this.name=name;

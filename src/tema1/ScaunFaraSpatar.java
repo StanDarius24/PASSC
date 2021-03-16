@@ -9,7 +9,9 @@ public class ScaunFaraSpatar extends Scaun{
     @Override
     public boolean isok(Task t)
     {
-
+        //exista mai multe tipuri de scaune, diferenta dintre ele e generata in aceasta functie
+        // in momentul in care se verifica daca respectivul task e valabil se returneaza fals chiar daca
+        // acesta nu este realizat
         String c=t.toString();
         if(super.tasks.contains(c))
             return false;
